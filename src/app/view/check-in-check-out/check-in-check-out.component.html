@@ -3,7 +3,7 @@
     <div class="d-flex my-3 row">
 
         <select [ngModel]="selectedEmployee" (ngModelChange)="onSelect($event)">
-            <option *ngFor="let item of employee">
+            <option *ngFor="let item of employee" [ngValue]="item">
                 {{item.name}}
 
             </option>
@@ -19,7 +19,9 @@
 
     </h3>
     <h3>{{checkInTime.toISOString()}}</h3>
-    <a class="btn btn-primary" (click)="checkIn()">Check In</a>
+    <a class="btn btn-primary m-3" (click)="checkIn()">Check In</a>
+    <a class="btn btn-primary m-3" (click)="checkOut()">Check Out</a>
+
 
 
 

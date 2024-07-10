@@ -15,7 +15,7 @@ import { AttendanceReport } from '../../model/attendance-report';
 export class DashboardComponent implements OnInit {
 
   report: AttendanceReport[] = [];
-  selectedDate!: Date;
+  selectedDate: Date = new Date();
 
 
   constructor(private reportService: ReportServiceService) {

@@ -22,7 +22,8 @@ export class CheckInCheckOutComponent implements OnInit {
   constructor(private employeeService: EmployeeService, private attendanceSerive: AttendanceService) {
   }
 
-  onSelect(event: any) {
+  onSelect(event: Employee) {
+    console.log("OnSelect", event.id);
     this.selectedEmployee = event;
   }
   async ngOnInit() {
@@ -35,11 +36,17 @@ export class CheckInCheckOutComponent implements OnInit {
 
   async checkIn() {
     var val = (await this.attendanceSerive.checkIn(this.selectedEmployee.id, this.checkInTime)).subscribe(val => {
-      console.log(val);
+      console.log("check in,", val);
     });
 
-
   }
+  async checkOut() {
+    console.log("checkout is called");
+    (await this.attendanceSerive.checkOut(this.selectedEmployee.id, this.checkInTime)).subscribe(val => {
+      console.log("check out,", val);
+    });
+  }
+
 
 
 
