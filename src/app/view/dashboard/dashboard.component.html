@@ -1,6 +1,7 @@
 <div class="container p-5" style=" background-color: antiquewhite">
-    <input type="date" placeholder="Search" class="input-group SearchBox my-5 py-2">
-
+    <input type="date" placeholder="Search" [(ngModel)]="selectedDate" (change)="fetchResult()"
+        class="input-group SearchBox my-5 py-2">
+    <a class="btn btn-primary" (click)="fetchResult()">Search</a>
     <table class="table">
         <thead>
             <tr>
@@ -10,20 +11,24 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>mdo</td>
-            </tr>
-            <tr>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>fat</td>
-            </tr>
-            <tr>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>fat</td>
+            <tr *ngFor="let item of report">
+                <td>{{item.name}}</td>
+                <td>
+                    <div *ngIf="item.checkInTime==null; else elseCheckInBlock">
+                        Null
+                    </div>
+                    <ng-template #elseCheckInBlock>
+                        {{item.checkInTime}}
+                    </ng-template>
+                </td>
+                <td>
+                    <div *ngIf="item.checkOutTime==null; else elseChectOutBlock">
+                        Null
+                    </div>
+                    <ng-template #elseChectOutBlock>
+                        {{item.checkOutTime}}
+                    </ng-template>
+                </td>
             </tr>
         </tbody>
     </table>

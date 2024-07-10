@@ -1,1 +1,26 @@
-<p>add-edit-employee works!</p>
+<div class="container m-5">
+
+    <form class="form-group" (ngSubmit)="updateEmployee()">
+        <div class="my-3">
+            <label>Id:</label>
+            <input class="mx-3" type="text" [(ngModel)]="employee.id" readonly>
+
+        </div>
+        <div class="my-3">
+            <label>Name:</label>
+            <input class="mx-3" type="text" [(ngModel)]="employee.name">
+        </div>
+
+        <div class="my-3">
+            <label>Department:</label>
+            <input class="mx-3" type="text" [(ngModel)]="employee.department">
+        </div>
+
+        <div class="my-3">
+            <label>Email:</label>
+            <input class="mx-3" type="email" [(ngModel)]="employee.email">
+        </div>
+
+        <button type="submit" class="btn btn-warning">Update Employee</button>
+    </form>
+</div>

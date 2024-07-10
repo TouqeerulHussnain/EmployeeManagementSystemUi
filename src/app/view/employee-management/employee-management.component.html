@@ -11,35 +11,17 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>mdo</td>
-                <td>Thornton gmail.com</td>
+            <tr *ngFor="let item of employees">
+                <td>{{item.id}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.department}}</td>
+                <td>{{item.email}}</td>
                 <td>
-                    <a class="btn btn-primary" routerLink="addEdit">Edit</a>
-                    <a class="btn btn-danger">Delete</a>
+                    <a class="btn btn-primary mx-1" routerLink="addEdit">Edit</a>
+                    <a class="btn btn-danger mx-1" (click)="deleteEmp(item.id)">Delete</a>
                 </td>
             </tr>
-            <tr>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>fat</td>
-                <td>Thornton gmail.com</td>
-            </tr>
 
-            <tr>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>fat</td>
-                <td>Thornton gmail.com</td>
-            </tr>
-            <tr>
-                <td>Jacob gmail.com</td>
-                <td>Thornton gmail.com</td>
-                <td>fat</td>
-                <td>Thornton gmail.com</td>
-            </tr>
         </tbody>
     </table>
 </div>
