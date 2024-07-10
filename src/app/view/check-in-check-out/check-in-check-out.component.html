@@ -2,19 +2,24 @@
     <label>Select Employee</label>
     <div class="d-flex my-3 row">
 
-        <select>
-            <option value="">Select a genre</option>
-            <option value="Fiction">Fiction</option>
-            <option value="Non-Fiction">Non-Fiction</option>
-            <option value="Mystery">Horror</option>
-            <option value="Thriller">Thriller</option>
+        <select [ngModel]="selectedEmployee" (ngModelChange)="onSelect($event)">
+            <option *ngFor="let item of employee">
+                {{item.name}}
+
+            </option>
         </select>
 
     </div>
     <div class="my-3 row ">
-        <input type="time" step="3600">
+        <input type="time" [value]="checkInTime | date: 'HH:mm'">
     </div>
-    <a class="btn btn-primary">Check In</a>
+
+    <h3 *ngFor="let item of employee">
+        {{item.name}} = {{item.id}}
+
+    </h3>
+    <h3>{{checkInTime.toISOString()}}</h3>
+    <a class="btn btn-primary" (click)="checkIn()">Check In</a>
 
 
 
