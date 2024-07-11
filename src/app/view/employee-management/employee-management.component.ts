@@ -15,9 +15,11 @@ import { EmployeeService } from '../../services/employee.service';
   styleUrl: './employee-management.component.css'
 })
 export class EmployeeManagementComponent implements OnInit {
-  ShowResultEmployees() {
 
+  AddEmployee() {
+    throw new Error('Method not implemented.');
   }
+
 
   employees: Employee[] = [];
   constructor(private employeeService: EmployeeService) {

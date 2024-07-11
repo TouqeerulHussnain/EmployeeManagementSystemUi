@@ -37,7 +37,7 @@ export class CheckInCheckOutComponent implements OnInit {
   }
 
   async checkIn() {
-    var val = (await this.attendanceSerive.checkIn(this.selectedEmployee.id, this.checkInTime)).subscribe({
+    var val = (await this.attendanceSerive.checkIn(this.selectedEmployee.id!, this.checkInTime)).subscribe({
 
       next: (val) => {
         console.log("CheckIn: ", val);
@@ -52,7 +52,7 @@ export class CheckInCheckOutComponent implements OnInit {
   }
   async checkOut() {
     console.log("checkout is called");
-    (await this.attendanceSerive.checkOut(this.selectedEmployee.id, this.checkInTime)).subscribe({
+    (await this.attendanceSerive.checkOut(this.selectedEmployee.id!, this.checkInTime)).subscribe({
       next: (val) => {
         console.log("checked out", val);
       },
