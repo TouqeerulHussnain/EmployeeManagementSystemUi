@@ -1,26 +1,35 @@
 <div class="container m-5">
 
-    <form class="form-group" (ngSubmit)="updateEmployee()">
+    <form class="form-group" [formGroup]="employeeForm">
         <div class="my-3">
             <label>Id:</label>
-            <input class="mx-3" type="text" [(ngModel)]="employee.id" readonly>
+            <input class="mx-3" [disabled]="true" type="text" formControlName='id' readonly name="Id">
 
         </div>
         <div class="my-3">
             <label>Name:</label>
-            <input class="mx-3" type="text" [(ngModel)]="employee.name">
+            <input class="mx-3" type="text" formControlName="name" name="Name">
+            <div *ngIf="employeeForm.get('name')!.hasError('required')">
+                <small>Name is required</small>
+            </div>
         </div>
-
         <div class="my-3">
             <label>Department:</label>
-            <input class="mx-3" type="text" [(ngModel)]="employee.department">
+            <input class="mx-3" type="text" formControlName="department" name="Department">
+            <div *ngIf="employeeForm.get('department')!.hasError('required')">
+                <small>Department is required</small>
+            </div>
         </div>
 
         <div class="my-3">
             <label>Email:</label>
-            <input class="mx-3" type="email" [(ngModel)]="employee.email">
+            <input class="mx-3" type="email" formControlName="email" name="Email">
+            <div *ngIf="employeeForm.get('email')!.hasError('email')">
+                <small>valid email required</small>
+            </div>
         </div>
-
-        <button type="submit" class="btn btn-warning">Update Employee</button>
+        <button type="submit" class="btn btn-warning" (click)="updateEmployee()">Update Employee</button>
     </form>
 </div>
+
+<div>{{employee.name}}</div>

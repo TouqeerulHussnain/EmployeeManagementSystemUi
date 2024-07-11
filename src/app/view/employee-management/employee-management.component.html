@@ -17,7 +17,7 @@
                 <td>{{item.department}}</td>
                 <td>{{item.email}}</td>
                 <td>
-                    <a class="btn btn-primary mx-1" routerLink="addEdit">Edit</a>
+                    <a class="btn btn-primary mx-1" [routerLink]="['/addEdit',item.id]">Edit</a>
                     <a class="btn btn-danger mx-1" (click)="deleteEmp(item.id)">Delete</a>
                 </td>
             </tr>

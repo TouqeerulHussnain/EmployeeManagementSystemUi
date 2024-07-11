@@ -13,12 +13,12 @@
     <div class="my-3 row ">
         <input type="time" [value]="checkInTime | date: 'HH:mm'">
     </div>
-
+    <!-- 
     <h3 *ngFor="let item of employee">
         {{item.name}} = {{item.id}}
 
-    </h3>
-    <h3>{{checkInTime.toISOString()}}</h3>
+    </h3> -->
+    <!-- <h3>{{checkInTime.toISOString()}}</h3> -->
     <a class="btn btn-primary m-3" (click)="checkIn()">Check In</a>
     <a class="btn btn-primary m-3" (click)="checkOut()">Check Out</a>
     <p class="text-danger">{{errorMsg}}</p>

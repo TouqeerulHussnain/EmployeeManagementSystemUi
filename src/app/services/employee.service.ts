@@ -22,4 +22,9 @@ export class EmployeeService {
     var result = await this.http.delete<Employee>(`https://localhost:7252/api/Employee/DeleteEmployee?id=${id}`);
     return result;
   }
+
+  async getEmployeeById(id: string) {
+    var result = await this.http.get<Employee>(`https://localhost:7252/api/Employee/GetEmployeeById?id=${id}`);
+    return result;
+  }
 }
