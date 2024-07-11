@@ -8,7 +8,8 @@ import { HttpClient } from '@angular/common/http';
 })
 export class EmployeeService {
   async updateEmployee(employee: Employee) {
-    // var result = await this.http.put<Employee>("");
+    var result = await this.http.put<Employee>("https://localhost:7252/api/Employee/UpdateEmployee", employee);
+    return result;
   }
 
   constructor(private http: HttpClient) { }
@@ -25,6 +26,11 @@ export class EmployeeService {
 
   async getEmployeeById(id: string) {
     var result = await this.http.get<Employee>(`https://localhost:7252/api/Employee/GetEmployeeById?id=${id}`);
+    return result;
+  }
+
+  async createEmployee(employee: Employee) {
+    var result = await this.http.post<Employee>(`https://localhost:7252/api/Employee/CreateOrUpdateEmployee`, employee);
     return result;
   }
 }

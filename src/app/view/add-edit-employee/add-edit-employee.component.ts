@@ -4,6 +4,7 @@ import { Employee } from '../../model/employee';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-edit-employee',
@@ -13,15 +14,11 @@ import { ActivatedRoute } from '@angular/router';
   styleUrl: './add-edit-employee.component.css'
 })
 export class AddEditEmployeeComponent {
+
   route: ActivatedRoute = inject(ActivatedRoute);
   employeeId = "0";
+  erroMsg: string = "";
 
-  employee: Employee = {
-    id: '',
-    name: '',
-    department: '',
-    email: ''
-  };
 
   employeeForm = new FormGroup({
     id: new FormControl("", [Validators.required]),
@@ -30,52 +27,42 @@ export class AddEditEmployeeComponent {
     email: new FormControl("", [Validators.email, Validators.required])
   });
 
-
-
-
-
-  constructor(private employeeService: EmployeeService) {
+  constructor(private employeeService: EmployeeService, private router: Router) {
     this.employeeId = this.route.snapshot.params['id']
   }
 
   async ngOnInit() {
-
     await this.getEmployeeById(this.employeeId)
-    // assume we have an employee id in the route params
-    // const id = this.route.snapshot.paramMap.get('id');
-    // this.employeeService.getEmployee(id).subscribe(employee => {
-    //   this.employee = employee;
-    // });
   }
 
-  updateEmployee(): void {
+  async updateEmployee() {
     if (this.employeeForm.valid) {
       console.log('Form is valid');
-      // Submit the form data
+      let local: Employee = {
+        name: this.employeeForm.value.name!,
+        department: this.employeeForm.value.department!,
+        email: this.employeeForm.value.email!,
+        id: this.employeeForm.value.id!
+      };
+      (await this.employeeService.updateEmployee(local)).subscribe({
+        next: (val) => {
+          console.log("Update the employe:", val);
+          this.router.navigate(['/employeeList']);
+        },
+        error: (error) => {
+          this.erroMsg = "Got Error. Is you email format is valid";
+        }
+      })
     } else {
       console.log('Form is invalid');
-      // Show error messages
-      //   Object.keys(this.employeeForm.controls).forEach(key => {
-      //     const control = this.employeeForm.controls[key];
-      //     if (control.invalid) {
-      //       console.log(`${key} is invalid`);
-      //       // Show error message for the control
-      //     }
-      //   }
-      // );
     }
     console.log(this.employeeForm);
-    // this.employeeService.updateEmployee(this.employee).subscribe(() => {
-    //   console.log('Employee updated successfully!');
-    // });
   }
 
   async getEmployeeById(id: string) {
-
     (await this.employeeService.getEmployeeById(id)).subscribe({
       next: (val) => {
-        this.employee = val;
-        this.initializaFormGroup(this.employee);
+        this.initializaFormGroup(val);
       },
       error: (error) => {
         console.log("No Employee Found for this Id")
@@ -91,6 +78,5 @@ export class AddEditEmployeeComponent {
       email: Emp.email,
       id: Emp.id,
     })
-
   }
 }

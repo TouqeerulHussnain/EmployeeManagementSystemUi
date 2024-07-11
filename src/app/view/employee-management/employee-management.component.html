@@ -1,5 +1,8 @@
 <div class="m-5">
 
+    <div class="">
+        <a class="btn btn-primary m-5" routerLink="/addEmployee">Add New Employee</a>
+    </div>
     <table class="table">
         <thead>
             <tr>
@@ -18,7 +21,7 @@
                 <td>{{item.email}}</td>
                 <td>
                     <a class="btn btn-primary mx-1" [routerLink]="['/addEdit',item.id]">Edit</a>
-                    <a class="btn btn-danger mx-1" (click)="deleteEmp(item.id)">Delete</a>
+                    <a class="btn btn-danger mx-1" (click)="deleteEmp(item.id!)">Delete</a>
                 </td>
             </tr>
 
