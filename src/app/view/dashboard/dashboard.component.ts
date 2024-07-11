@@ -15,20 +15,26 @@ import { AttendanceReport } from '../../model/attendance-report';
 export class DashboardComponent implements OnInit {
 
   report: AttendanceReport[] = [];
-  selectedDate: Date = new Date();
+  selectedDate: string = new Date().toISOString();
 
 
   constructor(private reportService: ReportServiceService) {
 
   }
-  ngOnInit(): void {
+  async ngOnInit() {
+    console.log("showing the")
     this.fetchResult();
+    // await this.initialLoad();
   }
 
-  async fetchResult() {
-    (await this.reportService.getReports(this.selectedDate)).subscribe(r => {
-      this.report = r;
+  fetchResult() {
+    this.reportService.getReports(this.selectedDate).subscribe({
+      next: (val) => {
+        this.report = val;
+      }
     });
   }
+
+
 
 }

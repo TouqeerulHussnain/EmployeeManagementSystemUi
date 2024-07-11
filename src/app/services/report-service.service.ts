@@ -10,9 +10,9 @@ export class ReportServiceService {
 
   constructor(private http: HttpClient) { }
 
-  async getReports(date: Date): Promise<Observable<AttendanceReport[]>> {
+  getReports(date: string): Observable<AttendanceReport[]> {
 
-    return await this.http.get<AttendanceReport[]>(`https://localhost:7252/api/Attendance/GetAttendanceReportByDate?dateTime=${date}`);
+    return this.http.get<AttendanceReport[]>(`https://localhost:7252/api/Attendance/GetAttendanceReportByDate?dateTime=${date}`);
   }
 
 }

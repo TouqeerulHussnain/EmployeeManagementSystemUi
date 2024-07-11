@@ -1,6 +1,8 @@
 <div class="container p-5" style=" background-color: antiquewhite">
+    <!-- <input type="date" placeholder="Search" [(ngModel)]="selectedDate" (change)="fetchResult()"
+        class="input-group SearchBox my-5 py-2"> -->
     <input type="date" placeholder="Search" [(ngModel)]="selectedDate" (change)="fetchResult()"
-        class="input-group SearchBox my-5 py-2">
+        [ngModel]="selectedDate | date :'yyyy-MM-dd'" class="input-group SearchBox my-5 py-2">
     <table class="table">
         <thead>
             <tr>
