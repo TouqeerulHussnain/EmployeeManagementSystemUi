@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AttendanceService } from '../../services/attendance.service';
 import { subscribe } from 'diagnostics_channel';
+import { error } from 'console';
 
 @Component({
   selector: 'app-check-in-check-out',
@@ -17,6 +18,7 @@ export class CheckInCheckOutComponent implements OnInit {
 
   checkInTime: Date = new Date();
   employee: Employee[] = [];
+  errorMsg: string = ""
 
   selectedEmployee!: Employee;
   constructor(private employeeService: EmployeeService, private attendanceSerive: AttendanceService) {
@@ -35,15 +37,29 @@ export class CheckInCheckOutComponent implements OnInit {
   }
 
   async checkIn() {
-    var val = (await this.attendanceSerive.checkIn(this.selectedEmployee.id, this.checkInTime)).subscribe(val => {
-      console.log("check in,", val);
+    var val = (await this.attendanceSerive.checkIn(this.selectedEmployee.id, this.checkInTime)).subscribe({
+
+      next: (val) => {
+        console.log("CheckIn: ", val);
+
+      },
+      error: (error) => {
+        this.errorMsg = "Already Checked In";
+        console.log("something went wrong");
+      }
     });
 
   }
   async checkOut() {
     console.log("checkout is called");
-    (await this.attendanceSerive.checkOut(this.selectedEmployee.id, this.checkInTime)).subscribe(val => {
-      console.log("check out,", val);
+    (await this.attendanceSerive.checkOut(this.selectedEmployee.id, this.checkInTime)).subscribe({
+      next: (val) => {
+        console.log("checked out", val);
+      },
+      error: (val) => {
+        console.log("Something went wrong", val);
+        this.errorMsg = "Already Checked out";
+      }
     });
   }
 
