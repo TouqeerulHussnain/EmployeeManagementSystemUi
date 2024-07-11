@@ -2,9 +2,10 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { EmployeeService } from '../../services/employee.service';
-import { Router } from '@angular/router';
+
 import { Employee } from '../../model/employee';
 
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-add-employee',
   standalone: true,
@@ -15,7 +16,7 @@ import { Employee } from '../../model/employee';
 export class AddEmployeeComponent {
 
 
-  constructor(private employeeService: EmployeeService, private router: Router) {
+  constructor(private employeeService: EmployeeService, private location: Location) {
 
 
   }
@@ -39,7 +40,7 @@ export class AddEmployeeComponent {
       (await this.employeeService.createEmployee(employee)).subscribe({
         next: (val) => {
           console.log("Added employee", val);
-          this.router.navigate(["/employeeList"]);
+          this.location.back();
         },
         error: (error) => {
           console.log("got error in creation of employee");

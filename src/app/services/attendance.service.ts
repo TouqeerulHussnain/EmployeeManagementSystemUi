@@ -18,7 +18,8 @@ export class AttendanceService {
     return result;
   }
   async checkOut(empId: string, time: Date) {
-    var result = await this.http.post(`https://localhost:7252/api/Attendance/CheckOut??empId=${empId}&checkOutTime=${time.toISOString()}&forDate=${time.toISOString()}`, {}
+    var result = await this.http.post(`https://localhost:7252/api/Attendance/CheckOut?empId=${empId}&checkOutTime=${time.toISOString()}&forDate=${time.toISOString()}`,
+      {}
 
     );//https://localhost:7252/api/Attendance/CheckOut?empId=a73d26fc-376d-4551-be61-3efc40a5e0e6&checkOutTime=2024-07-10T14%3A24%3A26.282Z
     return result;
